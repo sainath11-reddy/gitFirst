@@ -16,3 +16,8 @@ items[2].style.backgroundColor="green";
 for(let i of items){
     i.style.fontWeight="bold";
 }
+
+let li = document.getElementsByTagName("li");
+for(let i of li){
+    i.style.color="red";
+}
