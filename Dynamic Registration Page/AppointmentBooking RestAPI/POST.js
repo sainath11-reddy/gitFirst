@@ -4,6 +4,7 @@ var n1 = document.querySelector("#name");
 var e1 = document.querySelector("#email");
 let i=0;
 form.addEventListener("submit", saveToLocalStorage);
+document.addEventListener("DOMContentLoaded",showUserOnScreen);
 function showNewUserOnScreen(obj){
     let li = document.createElement("li");
     li.id = obj.id;
@@ -39,3 +40,11 @@ function showNewUserOnScreen(obj){
     
     
     }
+
+async function showUserOnScreen(e){
+    e.preventDefault();
+    let res = await axios.get("https://crudcrud.com/api/970829e3f8734c09b1054403afce2f1f/appointment");
+    res.data.forEach(obj => {
+        showNewUserOnScreen(obj);
+    });
+}
