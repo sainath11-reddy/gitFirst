@@ -50,10 +50,25 @@ async function showUserOnScreen(e){
     });
 }
 
-async function clickItem(e){
+function clickItem(e){
     if(e.target.classList.contains("btn-danger")){
         if(confirm("Are you sure")){
-            let li = e.target.parentElement;
+            deleteItem(e);
+            
+        }
+    }
+    if(e.target.classList.contains("btn-dark")){
+        let li = e.target.parentElement;
+        let arr = li.firstChild.textContent.split(" ");       
+        n1.value = arr[0];
+        e1.value=arr[1];
+        deleteItem(e);
+    }
+}
+
+async function deleteItem(e){
+    
+    let li = e.target.parentElement;
             try{
                 let res = await axios.delete("https://crudcrud.com/api/970829e3f8734c09b1054403afce2f1f/appointment/"+li.id);
                 console.log(res);
@@ -61,14 +76,6 @@ async function clickItem(e){
             }catch(e){
                 console.log(e)
             }
-            
-        }
-    }
-    // if(e.target.classList.contains("btn-dark")){
-    //     let li = e.target.parentElement;
-    //     let arr = li.firstChild.textContent.split(" ");       
-    //     n1.value = arr[0];
-    //     e1.value=arr[1];
-    //     ul.removeChild(li);
-    // }
+    
+
 }
