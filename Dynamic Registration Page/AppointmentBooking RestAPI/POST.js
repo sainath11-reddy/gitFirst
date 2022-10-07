@@ -4,10 +4,11 @@ var n1 = document.querySelector("#name");
 var e1 = document.querySelector("#email");
 let i=0;
 form.addEventListener("submit", saveToLocalStorage);
+ul.addEventListener("click",clickItem);
 document.addEventListener("DOMContentLoaded",showUserOnScreen);
 function showNewUserOnScreen(obj){
     let li = document.createElement("li");
-    li.id = obj.id;
+    li.id = obj._id;
     console.log(obj);
     li.appendChild( document.createTextNode(obj["name"] + ' '+obj["email"]));
     li.className="list-group-item";
@@ -47,4 +48,27 @@ async function showUserOnScreen(e){
     res.data.forEach(obj => {
         showNewUserOnScreen(obj);
     });
+}
+
+async function clickItem(e){
+    if(e.target.classList.contains("btn-danger")){
+        if(confirm("Are you sure")){
+            let li = e.target.parentElement;
+            try{
+                let res = await axios.delete("https://crudcrud.com/api/970829e3f8734c09b1054403afce2f1f/appointment/"+li.id);
+                console.log(res);
+                ul.removeChild(li);
+            }catch(e){
+                console.log(e)
+            }
+            
+        }
+    }
+    // if(e.target.classList.contains("btn-dark")){
+    //     let li = e.target.parentElement;
+    //     let arr = li.firstChild.textContent.split(" ");       
+    //     n1.value = arr[0];
+    //     e1.value=arr[1];
+    //     ul.removeChild(li);
+    // }
 }
